@@ -1,24 +1,9 @@
-import { GetStaticProps } from "next";
+import { useRouter } from "next/router"
 
-type ProductProps = {
-    product: {
-        id: string 
-    }
-}
+export default function Product() {
+  const { query } = useRouter()
 
-export default function Product({ product }: ProductProps){
-    return(
-        <h1>Id produto é: {product.id}</h1>
-    )
-}
-
-const getStaticProps : GetStaticProps<any, {id: string}> = async ({params}) => {
-    const productId = params?.id
-    return {
-        props: {
-            product:{
-                id: productId
-            }
-        }
-    }
+  return (
+    <h1>Product {JSON.stringify(query)}</h1>
+  )
 }
