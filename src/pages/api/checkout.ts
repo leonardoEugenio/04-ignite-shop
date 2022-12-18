@@ -3,6 +3,10 @@ import { stripe } from "../../lib/stripe";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
     const { priceId } = req.body
+
+    if (!priceId) {
+        return res.status(403).json({ error: 'price not found.' })
+    }
     
     const successUrl = `${process.env.NEXT_URL}/success` 
     const cancelUrl = `${process.env.NEXT_URL}/` 
